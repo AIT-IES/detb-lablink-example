@@ -12,7 +12,7 @@ This setup includes the following components:
   [FMU simulator clients](https://ait-lablink.readthedocs.io/projects/ait-lablink-fmusim) are used to connect the the simulation models with Lablink.
 * Several [plotters](https://ait-lablink.readthedocs.io/projects/ait-lablink-plotter) display status information of the models and data exchange with the digital twin in real time.
 
-All simulation models used for this virtual testbed prototype are provided as [Functional Mock-up Units](https://en.wikipedia.org/wiki/Functional_Mock-up_Interface)(FMUs) an can be found in folder [fmu](./fmu).
+All simulation models used for this virtual testbed prototype are provided as [Functional Mock-up Units](https://en.wikipedia.org/wiki/Functional_Mock-up_Interface) (FMUs) an can be found in folder [``fmu``](./fmu).
 They are compiled from the [Modelica](https://modelica.org/) models provided [here](https://github.com/AIT-IES/detb-models).
 
 
@@ -66,7 +66,7 @@ To start the OPC UA server, open the command prompt, change to the project subdi
 
 The configuration for all Lablink clients (incl. the CSV data for the CSV client) is contained in file [``setup\2_lablink_config\detb-sim-test-config.db``](./setup/2_lablink_config/detb-sim-test-config.db).
 To start the Lablink config server, simply **double-click batch script** [``setup\2_lablink_config\run_config.cmd``](./setup/2_lablink_config/run_config.cmd).
-Alternatively, you can open a new command prompt for each, change to the project subdirectory [``setup\3_run_testbed``](./setup/3_run_testbed) and type the script name.
+Alternatively, you can open a new command prompt, change to the project subdirectory [``setup\2_lablink_config``](./setup/2_lablink_config) and type the script name.
 
 **NOTE**:
 Once the server is running, you can view the available configurations in a web browser via [http://localhost:10101](http://localhost:10101).
@@ -78,7 +78,7 @@ A convenient tool for viewing the content of the database file (and editing it f
 
 All batch scripts for running the Lablink clients can be found in project subdirectory [``setup\3_run_testbed``](./setup/3_run_testbed).
 To start all the Lablink clients, simply **double-click batch script**[``setup\3_run_testbed\run_testbed.cmd``](./setup/3_run_testbed/run_testbed.cmd).
-Alternatively, you can open a new command prompt for each, change to the project subdirectory [``setup\3_run_testbed``](./setup/3_run_testbed) and type the script name.
+Alternatively, you can open a new command prompt (for each script), change to the project subdirectory [``setup\3_run_testbed``](./setup/3_run_testbed) and type the script name.
 
 **NOTE**:
 You can start the Lablink clients in arbitrary order.
