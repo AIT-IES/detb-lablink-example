@@ -1,0 +1,152 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>at.ac.ait.lablink.setup</groupId>
+  <artifactId>detb-opcua-test</artifactId>
+  <version>0.0.1</version>
+  <url>https://gitlab-intern.ait.ac.at</url>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>at.ac.ait.lablink.clients</groupId>
+      <artifactId>opcuaclient</artifactId>
+      <version>0.0.3</version>
+      <classifier>jar-with-dependencies</classifier>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>at.ac.ait.lablink.clients</groupId>
+      <artifactId>fmusim</artifactId>
+      <version>0.0.3</version>
+      <classifier>jar-with-dependencies</classifier>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>at.ac.ait.lablink.clients</groupId>
+      <artifactId>plotter</artifactId>
+      <version>0.0.4</version>
+      <classifier>jar-with-dependencies</classifier>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>at.ac.ait.lablink</groupId>
+      <artifactId>config</artifactId>
+      <version>0.1.1</version>
+      <classifier>jar-with-dependencies</classifier>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>at.ac.ait.lablink.clients</groupId>
+      <artifactId>dpbridge</artifactId>
+      <version>0.0.2</version>
+      <classifier>jar-with-dependencies</classifier>
+      <scope>provided</scope>
+    </dependency>
+
+  </dependencies>
+
+  <profiles>
+    <!-- This profile is used by the nativedependencies plugin. -->
+    <!-- This profile may need to be adapted according to your operating system. -->
+    <profile>
+
+      <activation>
+        <os>
+          <family>windows</family>
+          <arch>amd64</arch>
+        </os>
+      </activation>
+
+      <dependencies>
+
+        <!-- This dependency provides a ZIP file of the FMI++ Library binaries (compiled C++ libraries). -->
+        <dependency>
+          <groupId>at.ac.ait.fmipp</groupId>
+          <artifactId>libfmipp</artifactId>
+          <version>0.0.1</version>
+          <type>zip</type>
+          <classifier>natives-libfmipp-sundials-windows-release-x64</classifier>
+        </dependency>
+
+      </dependencies>
+
+    </profile>
+
+  </profiles>
+
+  <properties>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+  </properties>
+
+  <build>
+
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.4</version>
+        <executions>
+          <execution>
+            <id>default-jar</id>
+            <phase/>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.1.2</version>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>false</overWriteSnapshots>
+              <overWriteIfNewer>true</overWriteIfNewer>
+              <excludeTransitive>true</excludeTransitive>
+              <includeScope>provided</includeScope>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>com.teamtter.mavennatives</groupId>
+        <artifactId>nativedependencies-maven-plugin</artifactId>
+        <version>1.0.5</version>
+        <executions>
+          <execution>
+            <id>unpacknatives</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <skip>false</skip>
+          <autoDetectDirUpInFilesystem>true</autoDetectDirUpInFilesystem>
+          <autoDetectOSNatives>false</autoDetectOSNatives>
+        </configuration>
+      </plugin>
+
+    </plugins>
+
+  </build>
+
+</project>
